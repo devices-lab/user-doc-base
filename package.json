@@ -4,10 +4,10 @@
   "type": "module",
   "description": "A markdown documentation template for device documentation that adheres to the Devices Lab 'official' styles and layouts",
   "main": ".eleventy.js",
-  "repository": "https://github.com/devices-lab/website-template.git",
+  "repository": "https://github.com/devices-lab/user-doc-base.git",
   "author": "Dr John Vidler <j.vidler@lancaster.ac.uk>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-navigation": "^1.0.5",
