@@ -52,8 +52,8 @@ a {
 	display: inline-block;
 	@apply border-solid;
 	@apply border-b-2;
-	@apply border-black;
 	@apply rounded-sm;
+	border-color: var(--color-link-default);
 }
 
 .heading-banner {
@@ -63,6 +63,10 @@ a {
 	@apply flex;
 	@apply flex-col;
 	@apply items-center;
+}
+
+.heading-banner a {
+	border: none;
 }
 
 .line-image {
@@ -183,7 +187,6 @@ a {
 }
 
 .nav-wrapper {
-	position: sticky;
 	top: 1cap;
 	margin: 0;
 	padding: 1rem;
@@ -230,7 +233,7 @@ a {
 }
 
 .table-of-contents a:hover {
-	text-decoration: underline;
+	border-color: var(--color-link-hover);
 }
 
 .table-of-contents ol {

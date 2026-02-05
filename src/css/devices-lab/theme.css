@@ -12,6 +12,9 @@
     --color-root-text: #ffffff;
     --color-root-text-secondary: var(--color-lu-2);
 
+    --color-link-default: var(--color-lu-secondary);
+    --color-link-hover: var(--color-lu-1);
+
     --primary-bg-color: var(--color-lu-5);
     --secondary-bg-color: #dfdfdf;
 
