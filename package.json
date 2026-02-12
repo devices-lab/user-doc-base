@@ -1,6 +1,6 @@
 {
   "name": "@devices-lab/user-doc-base",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "type": "module",
   "description": "A markdown documentation template for device documentation that adheres to the Devices Lab 'official' styles and layouts",
   "main": ".eleventy.js",
