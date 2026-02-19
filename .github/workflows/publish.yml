@@ -3,7 +3,7 @@ name: Release to GitHub
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - '*'
 
 permissions:
   contents: write
