@@ -40,7 +40,39 @@ function deepMerge(target, ...sources) {
 }
 
 export default async function(eleventyConfig, options = {}) {
-	eleventyConfig.addGlobalData( "site", JSON.parse(file.readFileSync("./package.json", "utf-8")) );
+	// Load package.json and do a tiny bit of preprocessing to make it easier to render later
+	const siteData = JSON.parse(file.readFileSync("./package.json", "utf-8"));
+
+	if( siteData.extra ) {
+		if( siteData.extra.keywords && typeof siteData.extra.keywords === 'string' )
+			siteData.extra.keywords = siteData.extra.keywords.split(',').map( kw => kw.trim() );
+		
+		if( siteData.extra.hwidx && typeof siteData.extra.hwidx === 'string' )
+			siteData.extra.hwidx = siteData.extra.hwidx.split(',').map( hw => hw.trim() );
+
+		if( siteData.author && siteData.author.match(/(.*)<(.*)>/) ) {
+			const authorMatch = siteData.author.match(/(.*)<(.*)>/);
+			siteData.author = { name: authorMatch[1].trim(), email: authorMatch[2].trim() };
+		}
+
+		if( siteData.contributors && Array.isArray(siteData.contributors) ) {
+			siteData.contributors = siteData.contributors.map( contributor => {
+				if( typeof contributor === 'string' && contributor.match(/(.*)<(.*)>/) ) {
+					const contributorMatch = contributor.match(/(.*)<(.*)>/);
+					return { name: contributorMatch[1].trim(), email: contributorMatch[2].trim() };
+				}
+				else if (typeof contributor === 'string') {
+					return { name: contributor.trim() };
+				}
+				else if (typeof contributor === 'object' && contributor.name) {
+					return { name: contributor.name.trim(), email: contributor.email ? contributor.email.trim() : undefined };
+				}
+				
+				return contributor;
+			});
+		}
+	}
+	eleventyConfig.addGlobalData( "site", siteData );
 	
 	// Determine target input dir from the options list
 	const __targetInputDir = options.inputDir || 'src';
@@ -171,6 +203,10 @@ export default async function(eleventyConfig, options = {}) {
 	eleventyConfig.addWatchTarget("src/**/*.jpg");
 	eleventyConfig.addWatchTarget("src/**/*.jpeg");
 	eleventyConfig.addWatchTarget("src/**/*.svg");
+
+	// Include our data files as watch targets
+	eleventyConfig.addWatchTarget("package.json");
+	eleventyConfig.addWatchTarget("src/**/*.json");
 
 	//eleventyConfig.addPassthroughCopy({ "src/css": "css" });
 	eleventyConfig.addPassthroughCopy({ "src/img": "img" });

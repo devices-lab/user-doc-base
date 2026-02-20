@@ -10,32 +10,13 @@
     <title>{{ title | default(site.name) }}</title>
 </head>
 <body>
-    {% include './fragments/header.njk' %}
+    {%- include './fragments/header.njk' -%}
     <div class="page">
-        <div class="sidebar">
-            <div class="nav-wrapper">
-                <p>
-                    {%- if( image ) -%}
-                    <img src="{{ image }}" alt="{{ title | default('Image') }}" />
-                    {%- endif -%}
-                    {%- if( description | default(site.description) ) -%}
-                        {{ description | default(site.description) }}
-                    {%- endif -%}
-                </p>
-                <h3>{{ title | default(site.name) }}</h3>
-                <hr />
-                {{ content | toc | safe }}
-                <hr />
-                <ul>
-                    {% for name, item in collections.all %}
-                        <li>{{ name | dump }}: {{ item | dump }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+        {%- include './fragments/navigation.njk' -%}
         <div class="content">
             {{ content | safe }}
         </div>
+        {%- include './fragments/information.njk' -%}
     </div>
 </body>
 </html>
