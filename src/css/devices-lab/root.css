@@ -279,6 +279,24 @@ a {
 	aspect-ratio: 1 / 1;
 }
 
+.pill {
+	display: inline-block;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	background-color: var(--pill-bg-color);
+	color: var(--pill-fg-color);
+	font-size: 0.75rem;
+	font-weight: 500;
+}
+
+.card {
+	border: 1px solid var(--card-border-color);
+	border-radius: var(--box-corner-radius);
+	padding: 1rem;
+	background-color: var(--card-bg-color);
+	@apply drop-shadow-md;
+}
+
 @media (min-width: 1400px) {
 	h1, h2, h3, h4, h5, h6 {
 		text-align: left;
